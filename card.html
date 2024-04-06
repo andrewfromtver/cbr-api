@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>%SHORT_NAME%</title>
+<style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    width: 300px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.card-header {
+    padding: 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-header h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-body p, .card-footer p {
+    margin: 0 0 10px 0;
+    color: #666;
+}
+
+.card-footer {
+    padding: 20px;
+    text-align: center;
+    background-color: #f4f4f4;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+</style>
+</head>
+<body>
+
+<div class="card">
+    <div class="card-header">
+        <h2>%SHORT_NAME%</h2>
+    </div>
+    <div class="card-body">
+        <p><strong>Адрес:</strong> %ADDRESS%</p>
+        <p><strong>E-mail:</strong> %EMAIL%</p>
+        <p><strong>Телефон:</strong> %PHONE%</p>
+        <p><strong>ИНН:</strong> %INN%</p>
+        <p><strong>ОГРН:</strong> %OGRN%</p>
+        <p><strong>БИК:</strong> %BIC%</p>
+    </div>
+    <div class="card-footer">
+        <p>"%NAME%"</p>
+    </div>
+</div>
+
+</body>
+</html>
