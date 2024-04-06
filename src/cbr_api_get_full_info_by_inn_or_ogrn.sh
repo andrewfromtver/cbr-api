@@ -50,16 +50,16 @@ STATUS_CODE=$(echo "$HTTP_STATUS" | tail -c 4)
 if [ "$STATUS_CODE" -eq 200 ]; then
   case "$3" in 
     "json")
-      echo "$HTTP_STATUS" | head -c -4 | xmlstarlet fo --omit-decl | yq -p=xml -o=json
+      echo "$HTTP_STATUS" | head -c -4 | xmlstarlet fo --omit-decl | yq --xml-attribute-prefix + -p=xml -o=json
       ;;
     "yaml")
-      echo "$HTTP_STATUS" | head -c -4 | xmlstarlet fo --omit-decl | yq -p=xml -o=yaml
+      echo "$HTTP_STATUS" | head -c -4 | xmlstarlet fo --omit-decl | yq --xml-attribute-prefix + -p=xml -o=yaml
       ;;
     "xml")
       echo "$HTTP_STATUS" | head -c -4 | xmlstarlet fo --omit-decl
       ;;
     "html")
-      DATA=$(echo "$HTTP_STATUS" | head -c -4 | xmlstarlet fo --omit-decl | yq -p=xml -o=json)
+      DATA=$(echo "$HTTP_STATUS" | head -c -4 | xmlstarlet fo --omit-decl | yq --xml-attribute-prefix + -p=xml -o=json)
       NAME=$(echo "$DATA" | yq -r ".Envelope.Body.${QUERY_TYPE}Response.${QUERY_TYPE}Result.Name")
       SHORT_NAME=$(echo "$DATA" | yq -r ".Envelope.Body.${QUERY_TYPE}Response.${QUERY_TYPE}Result.ShortName")
       ADDRESS=$(echo "$DATA" | yq -r ".Envelope.Body.${QUERY_TYPE}Response.${QUERY_TYPE}Result.Address")
