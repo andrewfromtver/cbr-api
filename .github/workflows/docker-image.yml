@@ -19,8 +19,6 @@ jobs:
       - name: Build the Docker image
         run: |
           docker build . --file Dockerfile --tag ${{ github.event.repository.name }}:latest
-          docker cp README.md CONTAINER_ID:/README.md
-          docker commit CONTAINER_ID ${{ github.event.repository.name }}:latest
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v2
