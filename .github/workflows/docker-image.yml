@@ -7,6 +7,16 @@ on:
     branches: [ "main" ]
 
 jobs:
+  SAST-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: CodeQL Analysis
+        uses: github/codeql-action@v1
+        with:
+          languages: javascript  # Specify the languages you want to analyze
+          github_token: ${{ secrets.GITHUB_TOKEN }}  # Use the built-in GITHUB_TOKEN secret for authentication
+          
   build-and-publish:
     runs-on: ubuntu-latest
 
