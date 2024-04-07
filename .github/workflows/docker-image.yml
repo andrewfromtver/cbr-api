@@ -43,12 +43,3 @@ jobs:
         run: |
           docker tag ${{ github.event.repository.name }}:latest ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
-
-      - name: Add Docker Hub description
-        uses: peter-evans/dockerhub-description@v4
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          repository: peterevans/dockerhub-description
-          short-description: ${{ github.event.repository.description }}
-          enable-url-completion: true
