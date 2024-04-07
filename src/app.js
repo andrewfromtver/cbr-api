@@ -25,7 +25,7 @@ app.get('/api/cbr/get_full_info', (req, res) => {
             res.status(400).send(`Script encountered an error: ${stderr}`);
             return;
         }
-
+        
         console.log(`Script output: ${stdout}`);
         res.send(stdout);
     });

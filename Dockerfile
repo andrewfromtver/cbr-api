@@ -2,7 +2,7 @@ FROM node:14-alpine
 
 WORKDIR /usr/src/app
 RUN npm install express
-RUN apk add --no-cache curl xmlstarlet yq 
+RUN apk add --no-cache curl yq 
 COPY ./src/* .
 EXPOSE 80
 

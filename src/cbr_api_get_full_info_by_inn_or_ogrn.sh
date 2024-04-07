@@ -50,16 +50,17 @@ STATUS_CODE=$(echo "$HTTP_STATUS" | tail -c 4)
 if [ "$STATUS_CODE" -eq 200 ]; then
   case "$3" in 
     "json")
-      echo "$HTTP_STATUS" | head -c -4 | xmlstarlet fo --omit-decl | yq --xml-attribute-prefix + -p=xml -o=json
+      echo "$HTTP_STATUS" | head -c -4 | yq --xml-attribute-prefix + -p=xml -r ".Envelope.Body.${QUERY_TYPE}Response.${QUERY_TYPE}Result" -o=json
       ;;
     "yaml")
-      echo "$HTTP_STATUS" | head -c -4 | xmlstarlet fo --omit-decl | yq --xml-attribute-prefix + -p=xml -o=yaml
+      echo "$HTTP_STATUS" | head -c -4 | yq --xml-attribute-prefix + -p=xml -r ".Envelope.Body.${QUERY_TYPE}Response.${QUERY_TYPE}Result" -o=yaml
       ;;
     "xml")
-      echo "$HTTP_STATUS" | head -c -4 | xmlstarlet fo --omit-decl
+      echo "$HTTP_STATUS" | head -c -4
       ;;
     "html")
-      DATA=$(echo "$HTTP_STATUS" | head -c -4 | xmlstarlet fo --omit-decl | yq --xml-attribute-prefix + -p=xml -o=json)
+      NO_DATA="¯\\\\_(ツ)_\\/¯"
+      DATA=$(echo "$HTTP_STATUS" | head -c -4 | yq --xml-attribute-prefix + -p=xml -o=json)
       NAME=$(echo "$DATA" | yq -r ".Envelope.Body.${QUERY_TYPE}Response.${QUERY_TYPE}Result.Name")
       SHORT_NAME=$(echo "$DATA" | yq -r ".Envelope.Body.${QUERY_TYPE}Response.${QUERY_TYPE}Result.ShortName")
       ADDRESS=$(echo "$DATA" | yq -r ".Envelope.Body.${QUERY_TYPE}Response.${QUERY_TYPE}Result.Address")
@@ -76,7 +77,8 @@ if [ "$STATUS_CODE" -eq 200 ]; then
         sed "s/%PHONE%/${PHONE}/g" | \
         sed "s/%OGRN%/${OGRN}/g" | \
         sed "s/%INN%/${INN}/g" | \
-        sed "s/%BIC%/${BIC}/g"
+        sed "s/%BIC%/${BIC}/g" | \
+        sed "s/null/${NO_DATA}/g"
       ;;
     *)
       exit 1
