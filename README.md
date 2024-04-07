@@ -15,3 +15,9 @@ Response Formats: HTML, JSON, XML
 Description: Provides daily currency rates from the Central Bank of Russia.
 
 Response Formats: JSON, XML
+
+# Screenshots
+
+![Screenshot 1](./docs/screenshot_1.png)
+![Screenshot 1](./docs/screenshot_3.png)
+![Screenshot 1](./docs/screenshot_4.png)
