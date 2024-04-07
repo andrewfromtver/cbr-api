@@ -1,4 +1,4 @@
-FROM node:20.11-alpine
+FROM node:alpine
 
 LABEL org.opencontainers.image.source https://github.com/andrewfromtver/cbr-api
 
