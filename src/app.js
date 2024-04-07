@@ -34,7 +34,7 @@ app.get('/api/cbr/fin_org/get_full_info', (req, res) => {
     });
 });
 
-app.get('/api/cbr/currency/get_rates', (req, res) => {    
+app.get('/api/cbr/currency/get_daily_rates', (req, res) => {    
     // Validate input
     const date = req.query.date
     const output = req.query.output
