@@ -18,6 +18,6 @@ Response Formats: JSON, XML
 
 # Screenshots
 
-![Screenshot 1](./docs/screenshot_1.png)
-![Screenshot 1](./docs/screenshot_3.png)
-![Screenshot 1](./docs/screenshot_4.png)
+![Screenshot 1](./docs/screenshot-1.png)
+![Screenshot 2](./docs/screenshot-2.png)
+![Screenshot 3](./docs/screenshot-3.png)
