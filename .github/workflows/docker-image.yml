@@ -23,7 +23,6 @@ jobs:
         docker build . --file Dockerfile --tag cbr-api:latest
         echo "${{ github.repository_owner }}/${{ github.event.repository.name }}:${{ github.sha }}" > IMAGE_NAME
 
-jobs:
   publish:
     runs-on: ubuntu-latest
 
