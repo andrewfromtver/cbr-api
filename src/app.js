@@ -1,6 +1,7 @@
 const express = require('express');
 const { exec } = require('child_process');
 const RateLimit = require('express-rate-limit');
+const shellQuote = require('shell-quote');
 
 let limiter = RateLimit({
   windowMs: 15 * 60 * 1000,
@@ -15,9 +16,9 @@ app.use(express.json());
 
 app.get('/api/cbr/fin_org/get_full_info', (req, res) => {    
     // Validate input
-    const type = req.query.type
-    const data = req.query.data
-    const output = req.query.output
+    const type = shellQuote.parse(req.query.type)[0]
+    const data = shellQuote.parse(req.query.data)[0]
+    const output = shellQuote.parse(req.query.output)[0]
 
     // Execute shell command
     exec(`./cbr/fin_org/get_full_info.sh ${type} ${data} ${output}`, (error, stdout, stderr) => {
@@ -43,8 +44,8 @@ app.get('/api/cbr/fin_org/get_full_info', (req, res) => {
 
 app.get('/api/cbr/currency/get_daily_rates', (req, res) => {    
     // Validate input
-    const date = req.query.date
-    const output = req.query.output
+    const date = shellQuote.parse(req.query.date)[0]
+    const output = shellQuote.parse(req.query.output)[0]
 
     // Execute shell command
     exec(`./cbr/currency/get_daily_rates.sh ${date} ${output}`, (error, stdout, stderr) => {

@@ -1,10 +1,10 @@
-FROM node:14-alpine
+FROM node:20-alpine
 
 LABEL org.opencontainers.image.source https://github.com/andrewfromtver/cbr_api
 
 WORKDIR /usr/src/app
-RUN npm install express express-rate-limit
-RUN apk add --no-cache curl yq 
+RUN apk add --no-cache curl yq
+RUN npm install express express-rate-limit shell-quote
 COPY ./src .
 EXPOSE 80
 
