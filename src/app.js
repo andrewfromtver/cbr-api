@@ -13,7 +13,7 @@ app.get('/api/cbr/fin_org/get_full_info', (req, res) => {
     const output = req.query.output
 
     // Execute shell command
-    exec(`./get_full_info.sh ${type} ${data} ${output}`, (error, stdout, stderr) => {
+    exec(`./cbr/fin_org/get_full_info.sh ${type} ${data} ${output}`, (error, stdout, stderr) => {
         if (error) {
             console.error(`Error executing script: ${error}`);
             res.status(500).send(`Error executing script: ${error}`);

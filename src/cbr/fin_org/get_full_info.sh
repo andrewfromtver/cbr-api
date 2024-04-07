@@ -77,7 +77,7 @@ if [ "$STATUS_CODE" -eq 200 ]; then
       REGNUM=$(echo "$DATA" | yq -r ".Envelope.Body.${QUERY_TYPE}Response.${QUERY_TYPE}Result.REGNUM")
       STATUS=$(echo "$DATA" | yq -r ".Envelope.Body.${QUERY_TYPE}Response.${QUERY_TYPE}Result.Status")
       ID=$(echo "$DATA" | yq -r ".Envelope.Body.${QUERY_TYPE}Response.${QUERY_TYPE}Result.ID")
-      cat ./card.html | \
+      cat ./cbr/fin_org/card.html | \
         sed "s/%NAME%/${NAME}/g" | \
         sed "s/%SHORT_NAME%/${SHORT_NAME}/g" | \
         sed "s/%ADDRESS%/${ADDRESS}/g" | \
