@@ -1,7 +1,6 @@
 FROM node:alpine
 
 LABEL org.opencontainers.image.source https://github.com/andrewfromtver/cbr-api
-COPY ./README.md /README.md
 
 WORKDIR /usr/src/app
 

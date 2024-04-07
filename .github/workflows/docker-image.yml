@@ -43,3 +43,9 @@ jobs:
         run: |
           docker tag ${{ github.event.repository.name }}:latest ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
+
+      # Add README to Docker Hub
+      - name: Add README to Docker Hub
+        run: |
+          docker run --rm -v $(pwd):/workspace --workdir /workspace alpine:latest cp README.md /workspace
+          cat README.md | docker run -i --rm ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest sh -c 'cat > /README.md'
