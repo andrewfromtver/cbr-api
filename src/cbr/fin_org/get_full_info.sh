@@ -57,9 +57,6 @@ if [ "$STATUS_CODE" -eq 200 ]; then
     "json")
       echo "$HTTP_STATUS" | head -c -4 | yq --xml-attribute-prefix + -p=xml -r ".Envelope.Body.${QUERY_TYPE}Response.${QUERY_TYPE}Result" -o=json
       ;;
-    "yaml")
-      echo "$HTTP_STATUS" | head -c -4 | yq --xml-attribute-prefix + -p=xml -r ".Envelope.Body.${QUERY_TYPE}Response.${QUERY_TYPE}Result" -o=yaml
-      ;;
     "xml")
       echo "$HTTP_STATUS" | head -c -4
       ;;
