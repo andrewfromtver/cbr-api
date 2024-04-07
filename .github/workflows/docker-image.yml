@@ -14,11 +14,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Node.js 20.x
-        uses: actions/setup-node@v2
-        with:
-          node-version: '20.x'
-
       - name: Build the Docker image
         run: |
           docker build . --file Dockerfile --tag cbr-api:latest
