@@ -6,9 +6,11 @@ set -e
 case "$1" in 
   "ogrn")
     QUERY_TYPE="GetFullInfoByOGRN"
+    DATA_TYPE="OGRN"
     ;;
   "inn")
     QUERY_TYPE="GetFullInfoByINN"
+    DATA_TYPE="INN"
     ;;
   *)
     exit 1
@@ -17,10 +19,13 @@ esac
 # Set the SOAP request XML content
 SOAP_REQUEST=$(cat <<EOF
 <?xml version="1.0" encoding="utf-8"?>
-<soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
+<soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+  xmlns:soap12="http://www.w3.org/2003/05/soap-envelope"
+>
   <soap12:Body>
     <$QUERY_TYPE xmlns="http://web.cbr.ru/">
-      <INN>$2</INN>
+      <$DATA_TYPE>$2</$DATA_TYPE>
     </$QUERY_TYPE>
   </soap12:Body>
 </soap12:Envelope>
@@ -69,6 +74,9 @@ if [ "$STATUS_CODE" -eq 200 ]; then
       OGRN=$(echo "$DATA" | yq -r ".Envelope.Body.${QUERY_TYPE}Response.${QUERY_TYPE}Result.OGRN")
       INN=$(echo "$DATA" | yq -r ".Envelope.Body.${QUERY_TYPE}Response.${QUERY_TYPE}Result.INN")
       BIC=$(echo "$DATA" | yq -r ".Envelope.Body.${QUERY_TYPE}Response.${QUERY_TYPE}Result.BIC")
+      REGNUM=$(echo "$DATA" | yq -r ".Envelope.Body.${QUERY_TYPE}Response.${QUERY_TYPE}Result.REGNUM")
+      STATUS=$(echo "$DATA" | yq -r ".Envelope.Body.${QUERY_TYPE}Response.${QUERY_TYPE}Result.Status")
+      ID=$(echo "$DATA" | yq -r ".Envelope.Body.${QUERY_TYPE}Response.${QUERY_TYPE}Result.ID")
       cat ./card.html | \
         sed "s/%NAME%/${NAME}/g" | \
         sed "s/%SHORT_NAME%/${SHORT_NAME}/g" | \
@@ -78,7 +86,11 @@ if [ "$STATUS_CODE" -eq 200 ]; then
         sed "s/%OGRN%/${OGRN}/g" | \
         sed "s/%INN%/${INN}/g" | \
         sed "s/%BIC%/${BIC}/g" | \
-        sed "s/null/${NO_DATA}/g"
+        sed "s/%REGNUM%/${REGNUM}/g" | \
+        sed "s/%STATUS%/${STATUS}/g" | \
+        sed "s/%ID%/${ID}/g" | \
+        sed "s/null/${NO_DATA}/g" | \
+        sed "s/{\"+xsi:nil\": \"true\"}/${NO_DATA}/g"
       ;;
     *)
       exit 1

@@ -6,7 +6,7 @@ const port = 80;
 
 app.use(express.json());
 
-app.get('/api/cbr/get_full_info', (req, res) => {    
+app.get('/api/cbr/fin_org/get_full_info', (req, res) => {    
     // Validate input
     const type = req.query.type
     const data = req.query.data
@@ -32,5 +32,5 @@ app.get('/api/cbr/get_full_info', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+    console.log(`Server is running on port ${port}`);
 });
