@@ -1,6 +1,6 @@
 FROM node:alpine
 
-LABEL org.opencontainers.image.source https://github.com/andrewfromtver/cbr_api
+LABEL org.opencontainers.image.source https://github.com/andrewfromtver/cbr-api
 
 WORKDIR /usr/src/app
 
