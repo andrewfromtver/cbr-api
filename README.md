@@ -47,7 +47,12 @@ The response will contain the daily currency rates from the Central Bank of Russ
 
 # Screenshots
 
-![Screenshot 1](https://raw.githubusercontent.com/andrewfromtver/cbr-api/main/docs/screenshot-1.png)
-![Screenshot 2](https://raw.githubusercontent.com/andrewfromtver/cbr-api/main/docs/screenshot-2.png)
-![Screenshot 3](https://raw.githubusercontent.com/andrewfromtver/cbr-api/main/docs/screenshot-3.png)
-![Screenshot 4](https://raw.githubusercontent.com/andrewfromtver/cbr-api/main/docs/screenshot-4.png)
+<details>
+  <summary>Click to reveal screenshots</summary>
+  
+  ![Screenshot 1](https://raw.githubusercontent.com/andrewfromtver/cbr-api/main/docs/screenshot-1.png)
+  ![Screenshot 2](https://raw.githubusercontent.com/andrewfromtver/cbr-api/main/docs/screenshot-2.png)
+  ![Screenshot 3](https://raw.githubusercontent.com/andrewfromtver/cbr-api/main/docs/screenshot-3.png)
+  ![Screenshot 4](https://raw.githubusercontent.com/andrewfromtver/cbr-api/main/docs/screenshot-4.png)
+  
+</details>
