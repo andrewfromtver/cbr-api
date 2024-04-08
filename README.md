@@ -2,7 +2,7 @@
 
 The CBR API provides data from The Central Bank of the Russian Federation (https://cbr.ru) in XML, JSON, and HTML formats.
 
-# Available Requests
+## Available Requests
 
 * `/api/cbr/fin_org/get_full_info`
   
@@ -15,6 +15,35 @@ Response Formats: HTML, JSON, XML
 Description: Provides daily currency rates from the Central Bank of Russia.
 
 Response Formats: HTML, JSON, XML
+
+## Usage
+
+### Get Full Information about a Financial Organization
+
+#### Request
+
+`GET /api/cbr/fin_org/get_full_info?type={type}&data={data}&output={output}`
+
+- `type`: Type of identifier (inn, ogrn)
+- `data`: Identifier value
+- `output`: Desired output format (html, json, xml)
+
+#### Response
+
+The response will contain the full information about the specified financial organization in the requested format.
+
+### Get Daily Currency Rates
+
+#### Request
+
+`GET /api/cbr/currency/get_daily_rates?date={date}&output={output}`
+
+- `date`: Date for which you want to retrieve currency rates (DD/MM/YYYY)
+- `output`: Desired output format (html, json, xml)
+
+#### Response
+
+The response will contain the daily currency rates from the Central Bank of Russia for the specified date in the requested format.
 
 # Screenshots
 
