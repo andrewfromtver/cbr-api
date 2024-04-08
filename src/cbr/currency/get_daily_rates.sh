@@ -25,6 +25,11 @@ if [ "$STATUS_CODE" -eq 200 ]; then
     "xml")
       echo "$HTTP_STATUS" | head -c -4
       ;;
+    "html")
+      JSON_DATA=$(echo "$HTTP_STATUS" | head -c -4 | yq --xml-attribute-prefix + -p=xml -r ".ValCurs.Valute" -o=json)
+      ESCAPED_JSON=$(echo "$JSON_DATA" | awk '{gsub(/&/, "\\&");}1')
+      awk -v json="$ESCAPED_JSON" '{gsub("{JSON_DATA}", json)}1' ./cbr/currency/card.html | sed "s|{DATE}|$1|g"
+      ;;
     *)
       exit 1
   esac    

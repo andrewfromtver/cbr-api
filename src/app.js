@@ -37,7 +37,7 @@ app.get('/api/cbr/fin_org/get_full_info', (req, res) => {
         }
         
         console.log(`Script output: ${stdout}`);
-        res.setHeader('Content-Type', `application/${output}`);
+        res.setHeader('Content-Type', `text/${output}`);
         res.send(stdout);
     });
 });
@@ -64,7 +64,7 @@ app.get('/api/cbr/currency/get_daily_rates', (req, res) => {
         }
         
         console.log(`Script output: ${stdout}`);
-        res.setHeader('Content-Type', `application/${output}`);
+        res.setHeader('Content-Type', `text/${output}`);
         res.send(stdout);
     });
 });

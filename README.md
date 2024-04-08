@@ -14,10 +14,11 @@ Response Formats: HTML, JSON, XML
 
 Description: Provides daily currency rates from the Central Bank of Russia.
 
-Response Formats: JSON, XML
+Response Formats: HTML, JSON, XML
 
 # Screenshots
 
 ![Screenshot 1](https://raw.githubusercontent.com/andrewfromtver/cbr-api/main/docs/screenshot-1.png)
 ![Screenshot 2](https://raw.githubusercontent.com/andrewfromtver/cbr-api/main/docs/screenshot-2.png)
 ![Screenshot 3](https://raw.githubusercontent.com/andrewfromtver/cbr-api/main/docs/screenshot-3.png)
+![Screenshot 4](https://raw.githubusercontent.com/andrewfromtver/cbr-api/main/docs/screenshot-4.png)

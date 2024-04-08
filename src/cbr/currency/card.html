@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Курс валют на {DATE}</title>
+<style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 20px;
+    color: #666;
+    width: calc(100% - 40px);
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    border-bottom: 1px solid #dcdcdc;
+    padding: 12px 15px;
+    text-align: left;
+}
+
+th {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f6f6f6;
+}
+</style>
+</head>
+<body>
+
+<table id="currency-table">
+    <tr>
+        <th>Цифровой код</th>
+        <th>Буквенный код</th>
+        <th>Валюта</th>
+        <th>Стоимость</th>
+    </tr>
+</table>
+
+<script>
+    let currencyData = {JSON_DATA};
+
+    const populateCurrencyTable = () => {
+        let tableBody = document.getElementById('currency-table');
+        currencyData.forEach(function(currency) {
+            let row = document.createElement('tr');
+            row.innerHTML = `
+                <td>
+                    ${currency.NumCode}
+                </td>
+                <td>
+                    ${currency.CharCode}
+                </td>
+                <td>
+                    ${currency.Nominal} ${currency.Name}
+                </td>
+                <td>
+                    ${parseFloat(currency.Value.replace(',', '.')).toFixed(2)} руб.
+                </td>
+            `;
+            tableBody.appendChild(row);
+        });
+    }
+
+    populateCurrencyTable();
+</script>
+
+</body>
+</html>
