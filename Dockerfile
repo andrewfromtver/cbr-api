@@ -19,6 +19,6 @@ RUN chown -R apiuser:apiuser /usr/src/app
 
 USER apiuser
 
-EXPOSE 80
+EXPOSE 8080
 
 CMD ["node", "app.js"]
