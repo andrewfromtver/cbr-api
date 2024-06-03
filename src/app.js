@@ -3,13 +3,13 @@ const { exec } = require('child_process');
 const RateLimit = require('express-rate-limit');
 const shellQuote = require('shell-quote');
 
-let limiter = RateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100
-});
+// let limiter = RateLimit({
+//   windowMs: 15 * 60 * 1000,
+//   max: 100
+// });
 
 const app = express();
-app.use(limiter);
+// app.use(limiter);
 const port = 8080;
 
 app.use(express.json());
