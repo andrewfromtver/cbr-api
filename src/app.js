@@ -66,7 +66,7 @@ app.get('/api/cbr/currency/get_daily_rates', (req, res) => {
         }
         
         const remoteIp = req.ip || req.connection.remoteAddress;
-        console.info(`[INFO] - Remote IP: ${remoteIp}, Request details: ${type} ${data} ${output}`);
+        console.info(`[INFO] - Remote IP: ${remoteIp}, Request details: ${date} ${output}`);
         res.setHeader('Content-Type', `text/${output}`);
         res.send(stdout);
     });
