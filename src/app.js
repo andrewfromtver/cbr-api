@@ -24,20 +24,21 @@ app.get('/api/cbr/fin_org/get_full_info', (req, res) => {
     // Execute shell command
     exec(`./cbr/fin_org/get_full_info.sh ${type} ${data} ${output}`, (error, stdout, stderr) => {
         if (error) {
-            console.error(`Error executing script: ${error}`);
+            console.error(`[ERROR] - Error executing script: ${error}`);
             res.setHeader('Content-Type', 'text/plain');
             res.status(500).send(`Error executing script: ${error}`);
             return;
         }
 
         if (stderr) {
-            console.error(`Script encountered an error: ${stderr}`);
+            console.error(`[ERROR] - Script encountered an error: ${stderr}`);
             res.setHeader('Content-Type', 'text/plain');
             res.status(400).send(`Script encountered an error: ${stderr}`);
             return;
         }
         
-        console.log(`Script output: ${stdout}`);
+        const remoteIp = req.ip || req.connection.remoteAddress;
+        console.info(`[INFO] - Remote IP: ${remoteIp}, Request details: ${type} ${data} ${output}`);
         res.setHeader('Content-Type', `text/${output}`);
         res.send(stdout);
     });
@@ -51,25 +52,26 @@ app.get('/api/cbr/currency/get_daily_rates', (req, res) => {
     // Execute shell command
     exec(`./cbr/currency/get_daily_rates.sh ${date} ${output}`, (error, stdout, stderr) => {
         if (error) {
-            console.error(`Error executing script: ${error}`);
+            console.error(`[ERROR] - Error executing script: ${error}`);
             res.setHeader('Content-Type', 'text/plain');
             res.status(500).send(`Error executing script: ${error}`);
             return;
         }
 
         if (stderr) {
-            console.error(`Script encountered an error: ${stderr}`);
+            console.error(`[ERROR] - Script encountered an error: ${stderr}`);
             res.setHeader('Content-Type', 'text/plain');
             res.status(400).send(`Script encountered an error: ${stderr}`);
             return;
         }
         
-        console.log(`Script output: ${stdout}`);
+        const remoteIp = req.ip || req.connection.remoteAddress;
+        console.info(`[INFO] - Remote IP: ${remoteIp}, Request details: ${type} ${data} ${output}`);
         res.setHeader('Content-Type', `text/${output}`);
         res.send(stdout);
     });
 });
 
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+    console.info(`[INFO] - Server is running on port ${port}`);
 });
