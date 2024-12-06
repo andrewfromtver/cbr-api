@@ -11,7 +11,7 @@ let limiter = RateLimit({
 const app = express();
 app.set('trust proxy', 1);
 app.use(limiter);
-const port = 8080;
+const port = 8000;
 
 app.use(express.json());
 
