@@ -4,6 +4,12 @@ The CBR API provides data from The Central Bank of the Russian Federation (https
 
 ## Available Requests
 
+* `/api/cbr/fin_org/search`
+  
+Description: Provides array of fin orgs (VidID = 53) by search pattern (search by name).
+
+Response Formats: JSON, XML
+
 * `/api/cbr/fin_org/get_full_info`
   
 Description: Provides full information about a financial organization by its INN or OGRN.

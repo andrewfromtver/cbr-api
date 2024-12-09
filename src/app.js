@@ -8,6 +8,11 @@ let limiter = RateLimit({
     max: 100
 });
 
+let searchLimiter = RateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 1000 // Limit each IP to 1000 requests per `window` (15 minutes)
+});
+
 const app = express();
 app.set('trust proxy', 1);
 app.use(limiter);
@@ -17,9 +22,9 @@ app.use(express.json());
 
 app.get('/api/cbr/fin_org/get_full_info', (req, res) => {    
     // Validate input
-    const type = shellQuote.parse(req.query.type)[0]
-    const data = shellQuote.parse(req.query.data)[0]
-    const output = shellQuote.parse(req.query.output)[0]
+    const type = shellQuote.parse(req.query.type)[0];
+    const data = shellQuote.parse(req.query.data)[0];
+    const output = shellQuote.parse(req.query.output)[0];
 
     // Execute shell command
     exec(`./cbr/fin_org/get_full_info.sh ${type} ${data} ${output}`, (error, stdout, stderr) => {
@@ -44,10 +49,10 @@ app.get('/api/cbr/fin_org/get_full_info', (req, res) => {
     });
 });
 
-app.get('/api/cbr/fin_org/search', (req, res) => {    
+app.get('/api/cbr/fin_org/search', searchLimiter, (req, res) => {    
     // Validate input
-    const query = shellQuote.parse(req.query.query)[0]
-    const output = shellQuote.parse(req.query.output)[0]
+    const query = shellQuote.parse(req.query.query)[0];
+    const output = shellQuote.parse(req.query.output)[0];
 
     // Execute shell command
     exec(`./cbr/fin_org/search.sh ${query} ${output}`, (error, stdout, stderr) => {
@@ -74,8 +79,8 @@ app.get('/api/cbr/fin_org/search', (req, res) => {
 
 app.get('/api/cbr/currency/get_daily_rates', (req, res) => {    
     // Validate input
-    const date = shellQuote.parse(req.query.date)[0]
-    const output = shellQuote.parse(req.query.output)[0]
+    const date = shellQuote.parse(req.query.date)[0];
+    const output = shellQuote.parse(req.query.output)[0];
 
     // Execute shell command
     exec(`./cbr/currency/get_daily_rates.sh ${date} ${output}`, (error, stdout, stderr) => {
