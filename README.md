@@ -18,6 +18,19 @@ Response Formats: HTML, JSON, XML
 
 ## Usage
 
+### Search query
+
+#### Request
+
+`GET /api/cbr/fin_org/search?query={query}&output={output}`
+
+- `query`: Search query
+- `output`: Desired output format (json, xml)
+
+#### Response
+
+The response will contain the array of fin orgs (VidID = 53) by search pattern (search by name).
+
 ### Get Full Information about a Financial Organization
 
 #### Request

@@ -44,6 +44,34 @@ app.get('/api/cbr/fin_org/get_full_info', (req, res) => {
     });
 });
 
+app.get('/api/cbr/fin_org/search', (req, res) => {    
+    // Validate input
+    const query = shellQuote.parse(req.query.query)[0]
+    const output = shellQuote.parse(req.query.output)[0]
+
+    // Execute shell command
+    exec(`./cbr/fin_org/search.sh ${query} ${output}`, (error, stdout, stderr) => {
+        if (error) {
+            console.error(`[ERROR] - Error executing script: ${error}`);
+            res.setHeader('Content-Type', 'text/plain');
+            res.status(500).send(`Error executing script: ${error}`);
+            return;
+        }
+
+        if (stderr) {
+            console.error(`[ERROR] - Script encountered an error: ${stderr}`);
+            res.setHeader('Content-Type', 'text/plain');
+            res.status(400).send(`Script encountered an error: ${stderr}`);
+            return;
+        }
+        
+        const remoteIp = req.ip || req.connection.remoteAddress;
+        console.info(`[INFO] - Remote IP: ${remoteIp}, Request details: ${query} ${output}`);
+        res.setHeader('Content-Type', `text/${output}`);
+        res.send(stdout);
+    });
+});
+
 app.get('/api/cbr/currency/get_daily_rates', (req, res) => {    
     // Validate input
     const date = shellQuote.parse(req.query.date)[0]
