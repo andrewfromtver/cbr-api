@@ -4,7 +4,7 @@ set -e
 
 # Ensure required parameters are provided
 if [ -z "$1" ]; then
-  echo "Usage: $0 <Name> [Addr] [output_format]"
+  echo "Usage: $0 <Name> [output_format]"
   exit 1
 fi
 

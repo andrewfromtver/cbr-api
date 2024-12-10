@@ -22,7 +22,7 @@ app.get('/api/cbr/fin_org/get_full_info', (req, res) => {
     const output = shellQuote.parse(req.query.output)[0]
 
     // Execute shell command
-    exec(`./cbr/fin_org/get_full_info.sh ${type} ${data} ${output}`, (error, stdout, stderr) => {
+    exec(`./cbr/fin_org/get_full_info.sh "${type}" "${data}" "${output}"`, (error, stdout, stderr) => {
         if (error) {
             console.error(`[ERROR] - Error executing script: ${error}`);
             res.setHeader('Content-Type', 'text/plain');
@@ -38,7 +38,7 @@ app.get('/api/cbr/fin_org/get_full_info', (req, res) => {
         }
         
         const remoteIp = req.ip || req.connection.remoteAddress;
-        console.info(`[INFO] - Remote IP: ${remoteIp}, Request details: ${type} ${data} ${output}`);
+        console.info(`[INFO] - Remote IP: ${remoteIp}, Request type: get_full_info, Request details: "${type}" "${data}" "${output}"`);
         res.setHeader('Content-Type', `text/${output}`);
         res.send(stdout);
     });
@@ -46,11 +46,13 @@ app.get('/api/cbr/fin_org/get_full_info', (req, res) => {
 
 app.get('/api/cbr/fin_org/search', (req, res) => {    
     // Validate input
-    const query = shellQuote.parse(req.query.query)[0]
+    const query = shellQuote.parse(req.query.query)
     const output = shellQuote.parse(req.query.output)[0]
 
     // Execute shell command
-    exec(`./cbr/fin_org/search.sh ${query} ${output}`, (error, stdout, stderr) => {
+    let queryString = query.join(" ")
+    
+    exec(`./cbr/fin_org/search.sh "${queryString}" "${output}"`, (error, stdout, stderr) => {
         if (error) {
             console.error(`[ERROR] - Error executing script: ${error}`);
             res.setHeader('Content-Type', 'text/plain');
@@ -66,7 +68,7 @@ app.get('/api/cbr/fin_org/search', (req, res) => {
         }
         
         const remoteIp = req.ip || req.connection.remoteAddress;
-        console.info(`[INFO] - Remote IP: ${remoteIp}, Request details: ${query} ${output}`);
+        console.info(`[INFO] - Remote IP: ${remoteIp}, Request type: search, Request details: "${queryString}" "${output}"`);
         res.setHeader('Content-Type', `text/${output}`);
         res.send(stdout);
     });
@@ -78,7 +80,7 @@ app.get('/api/cbr/currency/get_daily_rates', (req, res) => {
     const output = shellQuote.parse(req.query.output)[0]
 
     // Execute shell command
-    exec(`./cbr/currency/get_daily_rates.sh ${date} ${output}`, (error, stdout, stderr) => {
+    exec(`./cbr/currency/get_daily_rates.sh "${date}" "${output}"`, (error, stdout, stderr) => {
         if (error) {
             console.error(`[ERROR] - Error executing script: ${error}`);
             res.setHeader('Content-Type', 'text/plain');
@@ -94,7 +96,7 @@ app.get('/api/cbr/currency/get_daily_rates', (req, res) => {
         }
         
         const remoteIp = req.ip || req.connection.remoteAddress;
-        console.info(`[INFO] - Remote IP: ${remoteIp}, Request details: ${date} ${output}`);
+        console.info(`[INFO] - Remote IP: ${remoteIp}, Request type: get_daily_rates, Request details: "${date}" "${output}"`);
         res.setHeader('Content-Type', `text/${output}`);
         res.send(stdout);
     });
