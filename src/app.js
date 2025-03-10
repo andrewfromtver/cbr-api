@@ -15,6 +15,13 @@ const port = 8000;
 
 app.use(express.json());
 
+app.get('/api/health', (req, res) => {
+    res.status(200).json({
+        status: 'UP',
+        timestamp: new Date().toISOString()
+    });
+});
+
 app.get('/api/cbr/fin_org/get_full_info', (req, res) => {    
     // Validate input
     const type = shellQuote.parse(req.query.type)[0]
