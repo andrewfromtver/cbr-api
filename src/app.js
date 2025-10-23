@@ -120,9 +120,9 @@ app.get('/api/cbr/currency/get_daily_rates', (req, res) => {
   );
 });
 
-app.get('/api/healthz', (req, res) => res.status(200).json({ status: 'ok' }));
+app.get('/api/cbr/healthz', (req, res) => res.status(200).json({ status: 'ok' }));
 
-app.get('/api/readyz', async (req, res) => {
+app.get('/api/cbr/readyz', async (req, res) => {
   try {
     const scripts = {
       get_full_info: './cbr/fin_org/get_full_info.sh',
@@ -133,10 +133,10 @@ app.get('/api/readyz', async (req, res) => {
     // Check if all scripts exist
     for (const [name, path] of Object.entries(scripts)) {
       if (!fs.existsSync(path)) {
-        console.error(`[ERROR] - Script ${path} not found`);
+        console.error(`[ERROR] - Method ${path} not found`);
         return res.status(503).json({
           status: 'not ready',
-          error: `Required script ${name} not found`,
+          error: `Required method ${name} not found`,
         });
       }
 
@@ -144,46 +144,20 @@ app.get('/api/readyz', async (req, res) => {
       try {
         fs.accessSync(path, fs.constants.X_OK);
       } catch (err) {
-        console.error(`[ERROR] - Script ${path} is not executable`);
+        console.error(`[ERROR] - Method ${path} is not accessable`);
         return res.status(503).json({
           status: 'not ready',
-          error: `Script ${name} is not executable`,
-        });
-      }
-
-      // Basic shell script validation
-      try {
-        await execPromise(`bash -n ${path}`);
-      } catch (err) {
-        console.error(
-          `[ERROR] - Script ${path} has syntax errors: ${err.message}`,
-        );
-        return res.status(503).json({
-          status: 'not ready',
-          error: `Script ${name} contains syntax errors`,
+          error: `Method ${name} is not accessable`,
         });
       }
     }
-
-    // Check if we can execute a simple test command
-    try {
-      await execPromise('bash --version');
-      res.status(200).json({
-        status: 'ready',
-        checks: {
-          scripts_present: true,
-          scripts_executable: true,
-          syntax_valid: true,
-          bash_available: true,
-        },
-      });
-    } catch (err) {
-      console.error('[ERROR] - Bash is not available');
-      res.status(503).json({
-        status: 'not ready',
-        error: 'Bash interpreter is not available',
-      });
-    }
+    res.status(200).json({
+      status: 'ready',
+      checks: {
+        methods_present: true,
+        methods_accessable: true
+      },
+    });
   } catch (err) {
     console.error(`[ERROR] - Readiness check failed: ${err.message}`);
     res.status(503).json({
