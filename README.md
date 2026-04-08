@@ -22,6 +22,12 @@ Description: Provides daily currency rates from the Central Bank of Russia.
 
 Response Formats: HTML, JSON, XML
 
+* `/api/cbr/daily_info/all_data_info`
+
+Description: Provides a comprehensive snapshot of daily financial indicators from the Central Bank of Russia, including currency exchange rates, precious metal prices, key interest rates, inflation data, and macroeconomic statistics such as international reserves.
+
+Response Formats: HTML, JSON, XML
+
 ## Usage
 
 ### Search query
@@ -63,6 +69,18 @@ The response will contain the full information about the specified financial org
 #### Response
 
 The response will contain the daily currency rates from the Central Bank of Russia for the specified date in the requested format.
+
+### Get Daily Info
+
+#### Request
+
+`GET /api/cbr/daily_info/all_data_info?output={output}`
+
+- `output`: Desired output format (html, json, xml)
+
+#### Response
+
+The response will contain a comprehensive snapshot of daily financial indicators from the Central Bank of Russia in the requested format.
 
 # Screenshots
 

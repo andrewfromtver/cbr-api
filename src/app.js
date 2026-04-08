@@ -120,6 +120,39 @@ app.get('/api/cbr/currency/get_daily_rates', (req, res) => {
   );
 });
 
+app.get('/api/cbr/daily_info/all_data_info', (req, res) => {
+  // Validate input
+  const output = shellQuote.parse(req.query.output)[0];
+
+  // Execute shell command
+  exec(
+    `./cbr/daily_info/all_data_info.sh "${output}"`,
+    (error, stdout, stderr) => {
+      if (error) {
+        console.error(`[ERROR] - Error executing script: ${error}`);
+        res.setHeader('Content-Type', 'text/plain');
+        res.status(500).send(`Error executing script: ${error}`);
+        return;
+      }
+
+      if (stderr) {
+        console.error(`[ERROR] - Script encountered an error: ${stderr}`);
+        res.setHeader('Content-Type', 'text/plain');
+        res.status(400).send(`Script encountered an error: ${stderr}`);
+        return;
+      }
+
+      const remoteIp = req.ip || req.connection.remoteAddress;
+      console.info(
+        `[INFO] - Remote IP: ${remoteIp}, Request type: get_all_data, Request details: "${output}"`,
+      );
+
+      res.setHeader('Content-Type', `text/${output}`);
+      res.send(stdout);
+    },
+  );
+});
+
 app.get('/api/cbr/healthz', (req, res) => res.status(200).json({ status: 'ok' }));
 
 app.get('/api/cbr/readyz', async (req, res) => {

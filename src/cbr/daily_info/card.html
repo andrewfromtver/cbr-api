@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Данные ЦБ</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #f5f7fa;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+h2 {
+    margin-top: 0;
+    color: #2c3e50;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.item:last-child {
+    border-bottom: none;
+}
+
+.value {
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card">
+<h2>💱 Курсы валют</h2>
+<div class='item'><span>USD</span><span class='value'>%USD% руб.</span></div>
+<div class='item'><span>EUR</span><span class='value'>%EUR% руб.</span></div>
+<div class='item'><span>CNY</span><span class='value'>%CNY% руб.</span></div>
+</div>
+
+<div class="card">
+<h2>🥇 Металлы</h2>
+    <div class='item'><span>Золото</span><span class='value'>%GOLD% руб./грамм</span></div>
+    <div class='item'><span>Серебро</span><span class='value'>%SILVER% руб./грамм</span></div>
+    <div class='item'><span>Платина</span><span class='value'>%PLAT% руб./грамм</span></div>
+    <div class='item'><span>Палладий</span><span class='value'>%PALL% руб./грамм</span></div>
+</div>
+
+<div class="card">
+<h2>📊 Показатели</h2>
+<div class="item">
+<span>Инфляция</span>
+<span class="value">%INFLATION%%</span>
+</div>
+
+<div class="item">
+<span>Ключевая ставка</span>
+<span class="value">%KEY_RATE%%</span>
+</div>
+
+<div class="item">
+<span>RUONIA</span>
+<span class="value">%RUONIA%%</span>
+</div>
+</div>
+
+<div class="card">
+<h2>📈 Макроэкономика</h2>
+
+<div class="item">
+<span>Международные резервы</span>
+<span class="value">%MACRO% млрд $</span>
+</div>
+
+</div>
+
+</body>
+</html>
